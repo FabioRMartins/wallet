@@ -2,11 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import './WalletStyle/Wallet.css';
+import { currenciesActions } from '../actions';
 
 class Wallet extends React.Component {
+  componentDidMount() {
+    const { addOperation } = this.props;
+    addOperation();
+  }
+
   render() {
     const {
       email,
+      currencies,
     } = this.props;
     return (
       <div>
@@ -20,8 +27,10 @@ class Wallet extends React.Component {
           <h4 data-testid="header-currency-field">
             BRL
           </h4>
-
         </header>
+        <p>
+          { currencies }
+        </p>
       </div>
     );
   }
@@ -29,10 +38,17 @@ class Wallet extends React.Component {
 
 Wallet.propTypes = {
   email: PropTypes.string.isRequired,
+  currencies: PropTypes.arrayOf.isRequired,
+  addOperation: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   email: state.user.email,
+  currencies: state.wallet.currencies,
 });
 
-export default connect(mapStateToProps)(Wallet);
+const mapDispatchToProps = (dispatch) => ({
+  addOperation: () => dispatch(currenciesActions()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Wallet);

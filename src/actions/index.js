@@ -9,9 +9,18 @@ export function addEmail(email) {
   };
 }
 
-export function addOperation(operation) {
+export function addOperation(currencies) {
   return {
     type: ADD_OPERATION,
-    operation,
+    currencies,
   };
 }
+
+export const currenciesActions = () => async (dispatch) => {
+  const URL = 'https://economia.awesomeapi.com.br/json/all';
+  const URL_FETCH = await fetch(URL);
+  const DATA = await URL_FETCH.json();
+  const currencies = Object.keys(DATA);
+  const getCurrencies = currencies.filter((item) => item !== 'USDT');
+  dispatch(addOperation(getCurrencies));
+};
