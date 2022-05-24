@@ -1,0 +1,8 @@
+.expenses {
+  align-items: center;
+  background-color: #7a507a;
+  color: white;
+  display: flex;
+  height: 80px;
+  justify-content: space-evenly;
+}
