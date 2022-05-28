@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { currenciesActions } from '../actions';
 import './ExpensesStyle/Expenses.css';
 
-class Expenses extends React.Component {
+class ExpensesDetails extends React.Component {
   render() {
     const {
       currencies,
@@ -57,7 +57,7 @@ class Expenses extends React.Component {
   }
 }
 
-Expenses.propTypes = {
+ExpensesDetails.propTypes = {
   currencies: PropTypes.arrayOf.isRequired,
 };
 
@@ -69,4 +69,4 @@ const mapDispatchToProps = (dispatch) => ({
   addOperation: () => dispatch(currenciesActions()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Expenses);
+export default connect(mapStateToProps, mapDispatchToProps)(ExpensesDetails);
