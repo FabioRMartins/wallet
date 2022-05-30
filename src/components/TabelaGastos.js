@@ -1,22 +1,21 @@
 import React from 'react';
-import './ExpensesStyle/Expenses.css';
+// import './ExpensesStyle/Expenses.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { removeBtn } from '../actions/index';
 
 class TabelaGastos extends React.Component {
-  upDateCurrency = (currency) => {
-    const currencyName = currency.split('/');
-    return currencyName;
+  remove = ({ target }) => {
+    const { dispatch, expenses } = this.props;
+    const erase = expenses.filter((expense) => Number(target.id) !== expense.id);
+    dispatch(removeBtn(erase));
   }
-
-  cambio = (value, rate) => (value * rate).toFixed(2);
 
   render() {
     const { expenses } = this.props;
     return (
-      <section className="expenses">
-        <table>
-
+      <table>
+        <thead>
           <tr>
             <th>Descrição</th>
             <th>Tag</th>
@@ -28,44 +27,44 @@ class TabelaGastos extends React.Component {
             <th>Moeda de conversão</th>
             <th>Editar/Excluir</th>
           </tr>
-
-          <tbody className="expenses">
-            { expenses.map((index) => (
-              <tr key={ index.id }>
-                <td>{ index.description }</td>
-                <td>{ index.tag }</td>
-                <td>{ index.method }</td>
-                <td>{ Number(index.value).toFixed(2) }</td>
-                <td>
-                  {this.upDateCurrency(
-                    index.exchangeRates[index.currency].name,
-                  )}
-                </td>
-                <td>
-                  { Number(
-                    index.exchangeRates[index.currency].ask,
-                  ).toFixed(2) }
-                </td>
-                <td>
-                  { Number(
-                    index.exchangeRates[index.currency].ask * index.value,
-                  ).toFixed(2) }
-                </td>
+        </thead>
+        <tbody>
+          {expenses.map((expense) => {
+            const { value, description, tag, method, currency, exchangeRates } = expense;
+            const { ask, name } = exchangeRates[currency];
+            return (
+              <tr key={ expense.id }>
+                <td>{ description }</td>
+                <td>{ tag }</td>
+                <td>{ method }</td>
+                <td>{ Number(value).toFixed(2) }</td>
+                <td>{ name }</td>
+                <td>{ Number(ask).toFixed(2) }</td>
+                <td>{ Number(value * ask).toFixed(2) }</td>
                 <td>Real</td>
+                <td>
+                  <button
+                    id={ expense.id }
+                    data-testid="delete-btn"
+                    type="button"
+                    onClick={ this.remove }
+                  >
+                    Excluir
+                  </button>
+                </td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-    );
+            );
+          })}
+        </tbody>
+      </table>);
   }
 }
+
+TabelaGastos.propTypes = {
+  expenses: PropTypes.objectOf(PropTypes.string),
+}.isRequired;
 
 const mapStateToProps = (state) => ({
   expenses: state.wallet.expenses,
 });
-
-TabelaGastos.propTypes = {
-  expenses: PropTypes.string.isRequired,
-};
 export default connect(mapStateToProps)(TabelaGastos);
