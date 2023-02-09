@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import './WalletStyle/Wallet.css';
+import './WalletStyle/Wallet.css';
 import { currenciesActions } from '../actions';
 import ExpensesDetails from '../components/ExpensesDetails';
 import WalletHeader from '../components/WalletHeader';

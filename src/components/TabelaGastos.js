@@ -1,5 +1,5 @@
 import React from 'react';
-// import './ExpensesStyle/Expenses.css';
+import './ExpensesStyle/Expenses.css';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { removeBtn } from '../actions/index';
@@ -14,7 +14,7 @@ class TabelaGastos extends React.Component {
   render() {
     const { expenses } = this.props;
     return (
-      <table>
+      <table className="expenses">
         <thead>
           <tr>
             <th>Descrição</th>

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { currenciesActions, fetchExpenses } from '../actions';
-// import './ExpensesStyle/Expenses.css';
+import './ExpensesStyle/Expenses.css';
 
 class ExpensesDetails extends React.Component {
   constructor() {

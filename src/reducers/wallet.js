@@ -4,6 +4,7 @@ import { ADD_OPERATION, ADD_EXPENSES, DELETE_EXPENSE } from '../actions/index';
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
+  exchangeRates: {},
 };
 
 const wallet = (state = INITIAL_STATE, action) => {

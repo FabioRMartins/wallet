@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addEmail } from '../actions/index';
-// import './LoginStyle/Login.css';
+import './LoginStyle/Login.css';
 
 class Login extends React.Component {
   constructor() {
@@ -49,7 +49,7 @@ class Login extends React.Component {
       return (
 
         <div className="loginPage">
-          <h1 className="title">TyrbeWallet</h1>
+          <h1 className="title">TrybeWallet</h1>
           <form className="loginForm">
             <label htmlFor="email">
               Email:
